@@ -1,0 +1,73 @@
+db.createUser(
+{
+  user: "rajesh",
+  pwd: "admin123",
+  roles: []
+}
+)
+
+function wdata()
+{
+const mongoose = require('mongoose');
+const uri = "mongodb://rajesh:admin123@rd-statefulset-mongodb-0.mongodb:27017/test";
+if(mongoose.connect(uri))
+ {
+  console.log("DB Connected");
+  }
+
+  const userSchema = 
+{
+  name: String,
+  address: String
+}
+
+const users = mongoose.model("users", userSchema);
+
+const newUser = new users({
+  name: "Kamlesh",
+  address: "Mumbai"
+})
+const value = newUser.save();
+console.log("Hi");
+console.log(value);
+
+//mongoose.connection.close();
+}
+
+
+function fdata()
+{
+  const express = require('express');
+  const mongoose = require('mongoose');
+  //const bodyParser = require('body-parser'); 
+  
+  const app = express()
+  //app.use(bodyParser.urlencoded({extended: true}));
+  app.use(express.json());
+const uri = "mongodb://rajesh:admin123@rd-statefulset-mongodb-0.mongodb:27017/test";
+if(mongoose.connect(uri))
+ {
+  console.log("DB Connected");
+  }
+
+  const userSchema = 
+{
+  name: String,
+  address: String
+}
+
+const users = mongoose.model("users", userSchema);
+
+
+const value = users.find();
+console.log("Hi");
+console.log(value);
+
+//mongoose.connection.close();
+}
+
+function fibo(n) { 
+    if (n < 2)
+        return 1;
+    else   return fibo(n - 2) + fibo(n - 1);
+}

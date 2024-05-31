@@ -1,0 +1,21 @@
+#To Build the docker image from local docker file
+ docker build -t my-app:1 . 
+
+#To run built docker container in detach mode(parallel running)
+ docker run -d --name myapp-container -p 80:3010 my-app:1
+
+#To interact with running container
+docker exec -it myapp-container sh
+
+
+#To interact to Mongo DB in stateful sets
+kubectl run -it mongo-shell --image=mongo:4.0.17 --rm -- /bin/bash
+
+#To interact using Cluster IP service with Mongo DB
+mongo rd-statefulset-mongodb-0.mongodb
+	
+#To interact with pod
+kubectl exec -it rd-statefulset-mongodb-0 -- sh
+
+#To get the deployments
+kubectl get deployments

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      
+      - name: myapp
+        image: rajeshdaundkar/rd-devops:3
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - name: http
+          containerPort: 3020
+          protocol: TCP
+        envFrom:
+          - configMapRef:
+              name : myapp  
+          - secretRef:
+              name: mysecret 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-app-lb
+  labels:
+    app: node-app-lb
+spec:
+  ports:
+  - port: 80
+    targetPort: 3020
+    protocol: TCP
+  selector:
+   app : myapp
+  type: LoadBalancer
+
+
