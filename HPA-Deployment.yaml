@@ -8,7 +8,7 @@ spec:
     kind: Deployment
     name: myapp
   minReplicas: 3
-  maxReplicas: 5
+  maxReplicas: 4
   metrics:
   - type: Resource
     resource:
